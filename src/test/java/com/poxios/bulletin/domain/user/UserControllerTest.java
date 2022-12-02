@@ -14,9 +14,12 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.BDDMockito.given;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
@@ -46,12 +49,14 @@ class UserControllerTest {
         String content = objectMapper.writeValueAsString(user);
 
         // when
-        mockMvc.perform(MockMvcRequestBuilders.post("/users").with(csrf())
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(content))
+        var res = mockMvc.perform(MockMvcRequestBuilders.post("/users").with(csrf())
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(content)).andExpect(status().isOk()).andReturn().getResponse();
+
+
 
         // then
-                .andExpect(status().isOk());
+        Integer.parseInt(res.getContentAsString());
 
     }
 }

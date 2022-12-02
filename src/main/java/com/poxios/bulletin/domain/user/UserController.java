@@ -2,14 +2,13 @@ package com.poxios.bulletin.domain.user;
 
 import com.poxios.bulletin.domain.user.dto.UserSignUpRequestDto;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.MethodArgumentNotValidException;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
 @RequiredArgsConstructor
+@Slf4j
 @RestController
 @RequestMapping("/users")
 public class UserController {
@@ -41,8 +40,5 @@ public class UserController {
 //        return id;
 //    }
 
-    @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<String> handle(Exception ex) {
-        return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
-    }
+
 }

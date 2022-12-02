@@ -28,4 +28,11 @@ public class UserSignUpRequestDto {
     @Length(min = 4, max = 16, message = "비밀번호는 4자 이상, 16자 이하로 입력해주세요.")
     private String password;
 
+    public User toEntity() {
+        return User.builder()
+                .name(name)
+                .email(email)
+                .password(password)
+                .build();
+    }
 }

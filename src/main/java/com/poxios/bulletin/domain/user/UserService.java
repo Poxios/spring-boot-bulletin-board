@@ -9,8 +9,10 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 @Service
 public class UserService {
+    private final UserRepository userRepository;
+
     @Transactional
     public Long signUp(UserSignUpRequestDto requestDto) {
-        return 1L;
+        return userRepository.save(requestDto.toEntity()).getId();
     }
 }
