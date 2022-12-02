@@ -1,5 +1,6 @@
 package com.poxios.bulletin.domain.user.dto;
 
+import com.poxios.bulletin.domain.user.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -26,4 +27,5 @@ public class UserSignUpRequestDto {
     @NotEmpty(message = "비밀번호는 필수 입력 값입니다.")
     @Length(min = 4, max = 16, message = "비밀번호는 4자 이상, 16자 이하로 입력해주세요.")
     private String password;
+
 }

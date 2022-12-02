@@ -20,22 +20,19 @@ public class SecurityConfiguration {
                 "/swagger-ui/**",
                 "/api/v1/login" // 임시
         );
+//        FIXME: change mvcMatchers to permitAll()
     }
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        return http.antMatcher("/**")
-                .authorizeRequests()
-                .antMatchers("/api/**").hasAuthority("USER")
+        return http.authorizeRequests()
+                .antMatchers("/**").permitAll() // 넓은 범위의 URL을 아래로 배치
                 .and()
                 .httpBasic().disable()
                 .formLogin().disable()
                 .cors().disable()
                 .csrf().disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .and()
-                .authorizeRequests()
-                .anyRequest().permitAll().and().build();
-
+                .and().build();
     }
 }

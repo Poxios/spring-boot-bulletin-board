@@ -15,7 +15,7 @@ import javax.validation.Valid;
 public class UserController {
     private final UserService userService;
 
-    @PostMapping("/")
+    @PostMapping
     public Long signUp(@RequestBody @Valid UserSignUpRequestDto requestDto) {
         return userService.signUp(requestDto);
     }
