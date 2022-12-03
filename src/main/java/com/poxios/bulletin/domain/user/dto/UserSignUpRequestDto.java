@@ -29,9 +29,10 @@ public class UserSignUpRequestDto {
     @Length(min = 4, max = 16, message = "비밀번호는 4자 이상, 16자 이하로 입력해주세요.")
     private String password;
 
-    @NotEmpty
+    // Enum Validator : https://www.baeldung.com/javax-validations-enums
+    // @ValueOfEnum(enumClass = UserRole.class)
+    // TODO: Update to official enum validator
     private UserRole role;
-
 
 
     public User toEntity() {
@@ -39,6 +40,7 @@ public class UserSignUpRequestDto {
                 .name(name)
                 .email(email)
                 .password(password)
+                .role(role)
                 .build();
     }
 }
